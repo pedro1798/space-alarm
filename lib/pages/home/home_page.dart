@@ -1,24 +1,19 @@
 // lib/pages/home_page.dart
-// home_page.dart: 컴포넌트와 외부 연결(라우팅, 부모 위젯) 담당
 
 import 'package:flutter/material.dart';
-import 'package:plata/pages/home/home_drawer.dart';
+import 'package:plata/pages/drawer/home_drawer.dart';
+import 'package:plata/widgets/home/home_plus_button.dart';
+import 'package:plata/controllers/theme_controller.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
 
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
   final String title;
+  // final이어야 한다?
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
+  // StatefulWidget이 처음 빌드될 때 자동으로 호출
 }
 
 class _MyHomePageState extends State<MyHomePage> {
@@ -26,11 +21,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _incrementCounter() {
     setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
+      // setState()는 상태를 변경하고 UI를 다시 그리도록 Flutter에 알리는 메서드입니다.
+      // setState로 감싸지 않으면 UI가 업데이트되지 않습니다.
       _counter++;
     });
   }
@@ -54,16 +46,6 @@ class _MyHomePageState extends State<MyHomePage> {
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
         child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          //
           // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
           // action in the IDE, or press "p" in the console), to see the
           // wireframe for each widget.
@@ -80,7 +62,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
             Text(
-              '$_counter',
+              '+ 누른 횟수 $_counter',
               style: Theme.of(context).textTheme.headlineMedium,
             ),
           ],
@@ -94,31 +76,39 @@ class _MyHomePageState extends State<MyHomePage> {
             tooltip: 'Increment',
             child: const Icon(Icons.add),
           ),
-          const SizedBox(width: 10), // 버튼 사이 간격
+          const SizedBox(width: 8), // 버튼 사이 간격
           FloatingActionButton(
+            // 설정 버튼
             onPressed: () {
-              showModalBottomSheet(
+              showDialog(
                 context: context,
                 builder: (context) {
-                  return FractionallySizedBox(
-                    heightFactor: 0.5, // 높이 비율
-                    widthFactor: 0.4,
-                    alignment: Alignment.bottomRight,
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(20),
-                        boxShadow: const [
-                          BoxShadow(
-                            color: Colors.black12,
-                            blurRadius: 10.0,
-                            offset: Offset(0, 5),
+                  return Stack(
+                    children: [
+                      Positioned(
+                        right: 16,
+                        bottom: 80, // FAB 위에 뜨게
+                        child: Material(
+                          color: Colors.transparent,
+                          child: Container(
+                            width: 200,
+                            padding: const EdgeInsets.all(16),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(16),
+                              boxShadow: const [
+                                BoxShadow(
+                                  color: Colors.black26,
+                                  blurRadius: 10,
+                                  offset: Offset(0, 4),
+                                ),
+                              ],
+                            ),
+                            child: const Text("빠른 알람 등록"),
                           ),
-                        ],
+                        ),
                       ),
-                      padding: const EdgeInsets.all(16),
-                      child: const Text('home_page.dart'),
-                    ),
+                    ],
                   );
                 },
               );
@@ -128,13 +118,6 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ],
       ),
-      /*
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
-      */
       drawer: const HomeDrawer(), // home_drawer.dart
     );
   }

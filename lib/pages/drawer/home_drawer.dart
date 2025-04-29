@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:plata/controllers/theme_controller.dart';
 import 'package:plata/pages/settings_page.dart';
+import 'package:get/get.dart';
 
 class HomeDrawer extends StatelessWidget {
   const HomeDrawer({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final ThemeController themeController = Get.find<ThemeController>();
+
     return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,
@@ -15,13 +19,12 @@ class HomeDrawer extends StatelessWidget {
             child: Text('home_drawer DrawerHeader'), // Drawer Header
           ),
           ListTile(
-            title: const Text('정확도'),
-            onTap: () {
-              // Update the state of the app
-              // ...
-              // Then close the drawer
-              Navigator.pop(context);
-            },
+            // 다크모드
+            title: FloatingActionButton(
+              onPressed: themeController.toggleTheme,
+              shape: CircleBorder(),
+              child: const Icon(Icons.dark_mode),
+            ),
           ),
           ListTile(
             title: const Text('루틴 등록'),
