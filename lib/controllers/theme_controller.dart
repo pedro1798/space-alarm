@@ -6,7 +6,7 @@ class ThemeController extends GetxController {
   // GetX를 사용하여 상태 관리를 간편하게 처리합니다.
 
   // 현재 테마를 저장하는 변수
-  var isDarkMode = false.obs;
+  var isDarkMode = Get.isPlatformDarkMode.obs;
 
   ThemeMode get themeMode =>
       isDarkMode.value ? ThemeMode.dark : ThemeMode.light;
