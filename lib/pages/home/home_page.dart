@@ -2,15 +2,18 @@
 
 import 'package:flutter/material.dart';
 import 'package:plata/pages/drawer/home_drawer.dart';
-import 'package:plata/widgets/home/home_plus_button.dart';
-import 'package:plata/controllers/theme_controller.dart';
+// import 'package:plata/widgets/home/home_plus_button.dart';
+// import 'package:plata/controllers/theme_controller.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
 
   final String title;
-  // final이어야 한다?
-
+  /*
+ 	•	StatefulWidget 클래스 자체는 한 번 생성되면 변경되지 않는 불변 객체입니다.
+	•	title 같은 필드는 초기 생성자에서 주입된 값이므로 변경되어선 안 됩니다.
+	•	그래서 final을 붙여 “이건 한 번만 설정되며, 이후 절대 변하지 않음”을 보장합니다.
+  */
   @override
   State<MyHomePage> createState() => _MyHomePageState();
   // StatefulWidget이 처음 빌드될 때 자동으로 호출
@@ -79,6 +82,8 @@ class _MyHomePageState extends State<MyHomePage> {
           const SizedBox(width: 8), // 버튼 사이 간격
           FloatingActionButton(
             // 설정 버튼
+            mini: true,
+            shape: const CircleBorder(),
             onPressed: () {
               showDialog(
                 context: context,

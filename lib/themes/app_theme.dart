@@ -5,14 +5,21 @@ class MyTheme {
     return ThemeData(
       fontFamily: 'NanumGothic',
       brightness: Brightness.light,
-      primaryColor: const Color.fromARGB(255, 189, 199, 208),
+      useMaterial3: true, // Material 3 사용
+      colorScheme: ColorScheme.fromSeed(
+        seedColor: const Color.fromARGB(255, 197, 216, 219), // primaryColor 역할
+        brightness: Brightness.light,
+      ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
-          backgroundColor: const Color.fromARGB(255, 165, 189, 208), // 버튼 색
+          backgroundColor: const Color.fromARGB(255, 0, 0, 0), // 버튼 색
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(15),
-          ), // 둥근 버튼
+          ), // 둥근 버튼S
         ),
+      ),
+      appBarTheme: AppBarTheme(
+        backgroundColor: const Color(0xFF000000), // AppBar 색상
       ),
     );
   }
@@ -21,14 +28,21 @@ class MyTheme {
     return ThemeData(
       fontFamily: 'NanumGothic',
       brightness: Brightness.dark,
-      primaryColor: const Color.fromARGB(255, 9, 48, 82),
+      useMaterial3: true, // Material 3 사용
+      colorScheme: ColorScheme.fromSeed(
+        seedColor: const Color(0xFF093052), // primaryColor 역할
+        brightness: Brightness.dark,
+      ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
-          backgroundColor: const Color.fromARGB(255, 165, 189, 208), // 버튼 색
+          backgroundColor: const Color.fromARGB(255, 50, 143, 220), // 버튼 색
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(15),
           ), // 둥근 버튼
         ),
+      ),
+      appBarTheme: AppBarTheme(
+        backgroundColor: const Color.fromARGB(255, 3, 21, 36), // AppBar 색상
       ),
     );
   }
