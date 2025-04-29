@@ -15,16 +15,16 @@ class HomeDrawer extends StatelessWidget {
         padding: EdgeInsets.zero,
         children: <Widget>[
           const DrawerHeader(
-            decoration: BoxDecoration(color: Colors.blue),
+            decoration: BoxDecoration(
+              color: Color.fromARGB(255, 137, 167, 193),
+            ),
             child: Text('home_drawer DrawerHeader'), // Drawer Header
           ),
           ListTile(
             // 다크모드
-            title: FloatingActionButton(
-              onPressed: themeController.toggleTheme,
-              shape: CircleBorder(),
-              child: const Icon(Icons.dark_mode),
-            ),
+            leading: const Icon(Icons.dark_mode),
+            title: const Text('다크모드'),
+            onTap: themeController.toggleTheme,
           ),
           ListTile(
             title: const Text('루틴 등록'),
