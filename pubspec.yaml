@@ -1,5 +1,5 @@
-name: plata
-description: "가계부 앱입니다.\n"
+name: "plata"
+description: "공간 기반 알람 어플리케이션 프로젝트입니다.\n"
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
@@ -31,6 +31,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_map: ^6.0.0
+  get: ^4.7.2
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
