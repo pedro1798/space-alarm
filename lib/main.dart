@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
       title: 'Space Alarm',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.orangeAccent),
-        fontFamily: 'NotoSansKR',
+        fontFamily: 'NanumGothic',
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
             backgroundColor: Colors.blue, // 버튼 색
@@ -28,3 +28,5 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+// 커밋 테스트

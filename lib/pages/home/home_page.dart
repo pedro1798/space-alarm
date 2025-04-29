@@ -69,7 +69,7 @@ class _MyHomePageState extends State<MyHomePage> {
           // wireframe for each widget.
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Container(
+            SizedBox(
               // 레이아웃 조절용 위젯. padding, margin, decoration 등 다양한 속성 제공
               width: MediaQuery.of(context).size.width * 0.6, // 반응형 너비 60%
               child: TextField(
