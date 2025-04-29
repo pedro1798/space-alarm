@@ -16,7 +16,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     // ThemeController를 Get으로 찾기
     final themeController = Get.find<ThemeController>();
-
     return Obx(
       () => GetMaterialApp(
         title: 'Space Alarm',
