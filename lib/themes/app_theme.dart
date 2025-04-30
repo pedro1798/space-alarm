@@ -7,19 +7,21 @@ class MyTheme {
       brightness: Brightness.light,
       useMaterial3: true, // Material 3 사용
       colorScheme: ColorScheme.fromSeed(
-        seedColor: const Color.fromARGB(255, 197, 216, 219), // primaryColor 역할
+        seedColor: const Color.fromARGB(255, 48, 142, 22),
+        // 홈페이지 앱바 생상
         brightness: Brightness.light,
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
-          backgroundColor: const Color.fromARGB(255, 0, 0, 0), // 버튼 색
+          backgroundColor: const Color.fromARGB(255, 169, 112, 112), // 버튼 색
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(15),
           ), // 둥근 버튼S
         ),
       ),
       appBarTheme: AppBarTheme(
-        backgroundColor: const Color(0xFF000000), // AppBar 색상
+        // 세팅 앱바 색상
+        backgroundColor: const Color.fromARGB(255, 169, 83, 83),
       ),
     );
   }

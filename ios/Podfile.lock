@@ -1,0 +1,22 @@
+PODS:
+  - Flutter (1.0.0)
+  - native_geofence (1.0.0):
+    - Flutter
+
+DEPENDENCIES:
+  - Flutter (from `Flutter`)
+  - native_geofence (from `.symlinks/plugins/native_geofence/ios`)
+
+EXTERNAL SOURCES:
+  Flutter:
+    :path: Flutter
+  native_geofence:
+    :path: ".symlinks/plugins/native_geofence/ios"
+
+SPEC CHECKSUMS:
+  Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
+  native_geofence: b6b6b2bca9bbf8181e646aab0e41a012089ee905
+
+PODFILE CHECKSUM: e30f02f9d1c72c47bb6344a0a748c9d268180865
+
+COCOAPODS: 1.16.2

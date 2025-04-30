@@ -1,18 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:plata/controllers/home_controller.dart';
+// import 'package:get/get.dart';
+// import 'package:plata/controllers/home_controller.dart';
 import 'package:plata/pages/drawer/home_drawer.dart';
 import 'package:plata/widgets/home/quick_alarm_dialog.dart';
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
+  const MyHomePage({super.key, required this.title}); // MyHomePage 생성자
+  // super.key는 부모 클래스인 StatefulWidget의 생성자에 key를 전달하는 역할
   final String title;
-  /*
- 	•	StatefulWidget 클래스 자체는 한 번 생성되면 변경되지 않는 불변 객체입니다.
-	•	title 같은 필드는 초기 생성자에서 주입된 값이므로 변경되어선 안 됩니다.
-	•	그래서 final을 붙여 “이건 한 번만 설정되며, 이후 절대 변하지 않음”을 보장합니다.
-  */
+
   @override
   State<MyHomePage> createState() => _MyHomePageState();
   // StatefulWidget이 처음 빌드될 때 자동으로 호출
@@ -21,7 +17,8 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(HomeController());
+    // final controller = Get.put(HomeController());
+    // 필요하면 주석 해제
 
     return Scaffold(
       appBar: AppBar(

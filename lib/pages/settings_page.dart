@@ -16,7 +16,3 @@ class _SettingPageState extends State<SettingPage> {
     );
   }
 }
-          // positions them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent (in
-          // this case, the AppBar).
-          // Column(
