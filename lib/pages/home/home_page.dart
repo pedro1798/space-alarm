@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:plata/pages/drawer/home_drawer.dart';
-// import 'package:plata/widgets/home/home_plus_button.dart';
+import 'package:plata/widgets/home/quick_alarm_dialog.dart';
 // import 'package:plata/controllers/theme_controller.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -88,38 +88,12 @@ class _MyHomePageState extends State<MyHomePage> {
               showDialog(
                 context: context,
                 builder: (context) {
-                  return Stack(
-                    children: [
-                      Positioned(
-                        right: 16,
-                        bottom: 80, // FAB 위에 뜨게
-                        child: Material(
-                          color: Colors.transparent,
-                          child: Container(
-                            width: 200,
-                            padding: const EdgeInsets.all(16),
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(16),
-                              boxShadow: const [
-                                BoxShadow(
-                                  color: Colors.black26,
-                                  blurRadius: 10,
-                                  offset: Offset(0, 4),
-                                ),
-                              ],
-                            ),
-                            child: const Text("빠른 알람 등록"),
-                          ),
-                        ),
-                      ),
-                    ],
-                  );
+                  return QuickAlarmDialog();
                 },
               );
             },
             tooltip: '다른 동작',
-            child: const Icon(Icons.settings),
+            child: const Icon(Icons.add), // add_circle_rounded 아이콘
           ),
         ],
       ),
