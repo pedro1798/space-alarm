@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 // import 'package:plata/controllers/home_controller.dart';
 import 'package:plata/pages/drawer/home_drawer.dart';
 import 'package:plata/widgets/home/quick_alarm_dialog.dart';
+import 'package:plata/themes/app_theme.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title}); // MyHomePage 생성자
