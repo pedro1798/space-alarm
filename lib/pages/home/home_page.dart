@@ -1,9 +1,10 @@
 // lib/pages/home_page.dart
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:plata/controllers/home_controller.dart';
 import 'package:plata/pages/drawer/home_drawer.dart';
 import 'package:plata/widgets/home/quick_alarm_dialog.dart';
-// import 'package:plata/controllers/theme_controller.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
@@ -20,38 +21,18 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // setState()는 상태를 변경하고 UI를 다시 그리도록 Flutter에 알리는 메서드입니다.
-      // setState로 감싸지 않으면 UI가 업데이트되지 않습니다.
-      _counter++;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
+    final controller = Get.put(HomeController());
+
     return Scaffold(
       appBar: AppBar(
+        // AppBar는 Material Design의 앱 바를 구현한 위젯입니다.
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
       ),
       body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
         child: Column(
-          // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
-          // action in the IDE, or press "p" in the console), to see the
-          // wireframe for each widget.
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             SizedBox(
@@ -64,9 +45,11 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
             ),
-            Text(
-              '+ 누른 횟수 $_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
+            Obx(
+              () => Text(
+                '+ 누른 횟수 ${controller.counter}',
+                style: Theme.of(context).textTheme.headlineMedium,
+              ),
             ),
           ],
         ),
@@ -75,7 +58,7 @@ class _MyHomePageState extends State<MyHomePage> {
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           FloatingActionButton(
-            onPressed: _incrementCounter,
+            onPressed: controller.incrementCounter,
             tooltip: 'Increment',
             child: const Icon(Icons.add),
           ),
