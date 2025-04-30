@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 // import 'package:plata/controllers/home_controller.dart';
 import 'package:plata/pages/drawer/home_drawer.dart';
 import 'package:plata/widgets/home/quick_alarm_dialog.dart';
-import 'package:plata/themes/app_theme.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title}); // MyHomePage 생성자
@@ -24,7 +23,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         // AppBar는 Material Design의 앱 바를 구현한 위젯입니다.
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        backgroundColor: Theme.of(context).colorScheme.primary,
         title: Text(widget.title),
       ),
       body: Center(
