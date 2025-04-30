@@ -2,149 +2,110 @@ import 'package:flutter/material.dart';
 
 class MyTheme {
   static ThemeData get lightTheme {
+    final colorScheme = ColorScheme.fromSeed(
+      seedColor: const Color(0xFFCCFF90),
+      // seedColor만 바꾸면 다른 색상으로 자동 생성됨
+      brightness: Brightness.light,
+    );
+
     return ThemeData(
       fontFamily: 'NanumGothic',
       brightness: Brightness.light,
       useMaterial3: true,
-      colorScheme: ColorScheme.fromSeed(
-        seedColor: const Color(
-          0xFF6200EE,
-        ), // Primary color: Purple 500, HEX: #6200EE
-        brightness: Brightness.light,
-      ),
+      colorScheme: colorScheme,
       textTheme: TextTheme(
-        bodyLarge: TextStyle(
-          color: Color(0xFF000000),
-          fontSize: 16,
-        ), // Body text: Black color
+        bodyLarge: TextStyle(color: colorScheme.onSurface, fontSize: 16),
         bodyMedium: TextStyle(
-          color: Color(0xFF333333), // Secondary text: Dark grey color
+          color: colorScheme.onSurface.withValues(),
           fontSize: 14,
-        ), // Smaller body text
+        ),
         headlineLarge: TextStyle(
-          color: Color(0xFF6200EE), // Headline: Primary purple color
+          color: colorScheme.primary,
           fontSize: 32,
           fontWeight: FontWeight.bold,
-        ), // Title text
+        ),
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
-          backgroundColor: const Color(
-            0xFFFFFFFF,
-          ), // Button background: White, HEX: #FFFFFF
+          backgroundColor: colorScheme.primary,
+          foregroundColor: colorScheme.onPrimary,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(15), // Rounded button corners
+            borderRadius: BorderRadius.circular(15),
           ),
         ),
       ),
-      appBarTheme: const AppBarTheme(
-        backgroundColor: Color(
-          0xFF6200EE,
-        ), // AppBar background: Primary purple color
-        titleTextStyle: TextStyle(
-          color: Colors.white, // AppBar title text: White color
-          fontSize: 20,
-        ), // AppBar title style
+      appBarTheme: AppBarTheme(
+        backgroundColor: colorScheme.primary,
+        titleTextStyle: TextStyle(color: colorScheme.onPrimary, fontSize: 20),
       ),
-      iconTheme: const IconThemeData(
-        color: Color(0xFF6200EE), // Icon color: Primary purple color
-      ),
+      iconTheme: IconThemeData(color: colorScheme.primary),
       scrollbarTheme: ScrollbarThemeData(
-        thumbColor: WidgetStateProperty.all(
-          const Color(0xFF6200EE),
-        ), // Scrollbar thumb color: Primary purple color
-        trackColor: WidgetStateProperty.all(
-          Colors.grey.shade300,
-        ), // Scrollbar track color: Light grey
+        thumbColor: WidgetStateProperty.all(colorScheme.primary),
+        trackColor: WidgetStateProperty.all(colorScheme.surfaceContainerHigh),
       ),
-      inputDecorationTheme: const InputDecorationTheme(
+      inputDecorationTheme: InputDecorationTheme(
         focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(
-            color: Color(0xFF6200EE),
-          ), // Focused input border: Primary purple color
+          borderSide: BorderSide(color: colorScheme.primary),
         ),
         enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(
-            color: Color(0xFFCCCCCC),
-          ), // Disabled input border: Light grey color
+          borderSide: BorderSide(color: colorScheme.outline),
         ),
-        hintStyle: TextStyle(
-          color: Color(0xFF9E9E9E),
-        ), // Hint text: Medium grey color
+        hintStyle: TextStyle(color: colorScheme.onSurface.withValues()),
       ),
     );
   }
 
   static ThemeData get darkTheme {
+    final colorScheme = ColorScheme.fromSeed(
+      seedColor: const Color(0xFFCCFF90),
+      brightness: Brightness.dark,
+    );
+
     return ThemeData(
       fontFamily: 'NanumGothic',
       brightness: Brightness.dark,
       useMaterial3: true,
-      colorScheme: ColorScheme.fromSeed(
-        seedColor: const Color(
-          0xFFBB86FC,
-        ), // Primary color: Purple 200, HEX: #BB86FC
-        brightness: Brightness.dark,
-      ),
+      colorScheme: colorScheme,
       textTheme: TextTheme(
-        bodyLarge: TextStyle(
-          color: Color(0xFFFFFFFF),
-          fontSize: 16,
-        ), // Body text: White color
+        bodyLarge: TextStyle(color: colorScheme.onSurface, fontSize: 16),
         bodyMedium: TextStyle(
-          color: Color(0xFFBDBDBD), // Secondary text: Light grey color
+          color: colorScheme.onSurface.withValues(),
           fontSize: 14,
-        ), // Smaller body text
+        ),
         headlineLarge: TextStyle(
-          color: Color(0xFFBB86FC), // Headline: Secondary purple color
+          color: colorScheme.primary,
           fontSize: 32,
           fontWeight: FontWeight.bold,
-        ), // Title text
+        ),
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
-          backgroundColor: const Color(
-            0xFF121212,
-          ), // Button background: Dark grey, HEX: #121212
+          backgroundColor: colorScheme.primary,
+          foregroundColor: colorScheme.onPrimary,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(15), // Rounded button corners
+            borderRadius: BorderRadius.circular(15),
           ),
         ),
       ),
-      appBarTheme: const AppBarTheme(
-        backgroundColor: Color(
-          0xFF121212,
-        ), // AppBar background: Dark grey color
-        titleTextStyle: TextStyle(
-          color: Colors.white, // AppBar title text: White color
-          fontSize: 20,
-        ), // AppBar title style
+      appBarTheme: AppBarTheme(
+        backgroundColor: colorScheme.surface,
+        titleTextStyle: TextStyle(color: colorScheme.onSurface, fontSize: 20),
       ),
-      iconTheme: const IconThemeData(
-        color: Color(0xFFBB86FC), // Icon color: Secondary purple color
-      ),
+      iconTheme: IconThemeData(color: colorScheme.primary),
       scrollbarTheme: ScrollbarThemeData(
-        thumbColor: WidgetStateProperty.all(
-          const Color(0xFFBB86FC),
-        ), // Scrollbar thumb color: Secondary purple color
+        thumbColor: WidgetStateProperty.all(colorScheme.primary),
         trackColor: WidgetStateProperty.all(
-          Colors.grey.shade700,
-        ), // Scrollbar track color: Dark grey
+          colorScheme.surfaceContainerHighest,
+        ),
       ),
-      inputDecorationTheme: const InputDecorationTheme(
+      inputDecorationTheme: InputDecorationTheme(
         focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(
-            color: Color(0xFFBB86FC),
-          ), // Focused input border: Secondary purple color
+          borderSide: BorderSide(color: colorScheme.primary),
         ),
         enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(
-            color: Color(0xFF616161),
-          ), // Disabled input border: Medium grey color
+          borderSide: BorderSide(color: colorScheme.outline),
         ),
-        hintStyle: TextStyle(
-          color: Color(0xFF9E9E9E),
-        ), // Hint text: Medium grey color
+        hintStyle: TextStyle(color: colorScheme.onSurface.withValues()),
       ),
     );
   }

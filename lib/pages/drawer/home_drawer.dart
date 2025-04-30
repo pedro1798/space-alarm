@@ -3,7 +3,6 @@ import 'package:plata/controllers/theme_controller.dart';
 import 'package:plata/pages/settings_page.dart';
 import 'package:plata/pages/geofense_page.dart';
 import 'package:get/get.dart';
-import 'package:plata/themes/app_theme.dart'; // 테마 사용
 
 class HomeDrawer extends StatelessWidget {
   const HomeDrawer({super.key});
@@ -12,11 +11,12 @@ class HomeDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeController themeController = Get.find<ThemeController>();
     final ColorScheme colorScheme =
-        Theme.of(context).colorScheme; // 자주 쓸거니까 꺼내놓음
-    final TextTheme textTheme = Theme.of(context).textTheme;
+        Theme.of(context).colorScheme; // 테마에서 colorScheme 가져오기
+    final TextTheme textTheme =
+        Theme.of(context).textTheme; // 테마에서 textTheme 가져오기
 
     return Drawer(
-      backgroundColor: colorScheme.background, // Drawer 전체 배경도 테마 적용
+      backgroundColor: colorScheme.surface, // Drawer 배경 색상
       child: ListView(
         padding: EdgeInsets.zero,
         children: <Widget>[
@@ -25,7 +25,7 @@ class HomeDrawer extends StatelessWidget {
               color: colorScheme.primary, // primary 색상 사용
             ),
             child: Text(
-              'home_drawer DrawerHeader',
+              "I'll let you know when you arrive.",
               style: textTheme.headlineLarge?.copyWith(
                 color: colorScheme.onPrimary, // primary 대비 텍스트 색상
                 fontWeight: FontWeight.bold,
@@ -37,7 +37,7 @@ class HomeDrawer extends StatelessWidget {
             title: Text(
               '다크모드',
               style: textTheme.bodyLarge?.copyWith(
-                color: colorScheme.onBackground,
+                color: colorScheme.onSurface, // 배경에 대비되는 텍스트 색상
               ),
             ),
             onTap: themeController.toggleTheme,
@@ -50,7 +50,7 @@ class HomeDrawer extends StatelessWidget {
             title: Text(
               '루틴 등록',
               style: textTheme.bodyLarge?.copyWith(
-                color: colorScheme.onBackground,
+                color: colorScheme.onSurface,
               ),
             ),
             onTap: () {
@@ -65,7 +65,7 @@ class HomeDrawer extends StatelessWidget {
             title: Text(
               'Settings',
               style: textTheme.bodyLarge?.copyWith(
-                color: colorScheme.onBackground,
+                color: colorScheme.onSurface,
               ),
             ),
             onTap: () {
