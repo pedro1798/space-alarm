@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:plata/pages/drawer/home_drawer.dart';
 import 'package:plata/widgets/home/quick_alarm_dialog.dart';
-import 'package:native_geofence/native_geofence.dart';
-import 'package:native_geofence/src/typedefs.dart';
 import 'package:plata/handers/geofence_register.dart' as geofenceRegister;
 
 class MyHomePage extends StatefulWidget {
@@ -23,45 +21,8 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-    _initializeGeofence();
-  }
-
-  Future<void> _initializeGeofence() async {
-    await NativeGeofenceManager.instance.initialize();
-  }
-
-  Future<void> _registerGeofence() async {
-    final latitude = double.tryParse(_latitudeController.text);
-    final longitude = double.tryParse(_longitudeController.text);
-    final radius = double.tryParse(_radiusController.text);
-
-    if (latitude == null || longitude == null || radius == null) {
-      print('유효한 값을 입력하세요.');
-      return;
-    }
-
-    final geofence = Geofence(
-      id: 'custom_geofence',
-      location: Location(latitude: latitude, longitude: longitude),
-      radiusMeters: radius,
-      triggers: {GeofenceEvent.enter, GeofenceEvent.exit},
-      iosSettings: IosGeofenceSettings(initialTrigger: true),
-      androidSettings: AndroidGeofenceSettings(
-        initialTriggers: {GeofenceEvent.enter},
-        expiration: const Duration(days: 7),
-        loiteringDelay: const Duration(minutes: 5),
-        notificationResponsiveness: const Duration(minutes: 5),
-      ),
-    );
-
-    await NativeGeofenceManager.instance.createGeofence(
-      geofence,
-      (GeofenceEvent event) {
-            print('Geofence Event: $event');
-          }
-          as GeofenceCallback,
-    );
-    print('지오펜스가 등록되었습니다.');
+    geofenceRegister.initializeGeofence(); // Geofence 초기화
+    // Geofence 초기화는 앱이 시작될 때 한 번만 호출되도록 initState에서 처리
   }
 
   @override
@@ -110,7 +71,13 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               SizedBox(height: 16),
               ElevatedButton(
-                onPressed: _registerGeofence,
+                onPressed: () async {
+                  await geofenceRegister.registerGeofence(
+                    lat: _latitudeController.text,
+                    long: _longitudeController.text,
+                    rad: _radiusController.text,
+                  );
+                },
                 child: Text('지오펜스 등록'),
               ),
             ],

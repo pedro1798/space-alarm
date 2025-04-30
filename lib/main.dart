@@ -5,7 +5,6 @@ import 'pages/home/home_page.dart';
 import 'themes/app_theme.dart';
 import 'package:native_geofence/native_geofence.dart';
 import 'handers/location_permission_hander.dart';
-import 'package:plata/pages/geofense_page.dart';
 
 void main() async {
   Get.put(ThemeController()); // 의존성 주입
