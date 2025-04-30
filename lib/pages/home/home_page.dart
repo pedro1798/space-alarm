@@ -1,5 +1,3 @@
-// lib/pages/home_page.dart
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plata/controllers/home_controller.dart';
@@ -45,40 +43,21 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
             ),
-            Obx(
-              () => Text(
-                '+ 누른 횟수 ${controller.counter}',
-                style: Theme.of(context).textTheme.headlineMedium,
-              ),
-            ),
           ],
         ),
       ),
-      floatingActionButton: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          FloatingActionButton(
-            onPressed: controller.incrementCounter,
-            tooltip: 'Increment',
-            child: const Icon(Icons.add),
-          ),
-          const SizedBox(width: 8), // 버튼 사이 간격
-          FloatingActionButton(
-            // 설정 버튼 - add 버튼 분리하기
-            mini: true,
-            shape: const CircleBorder(),
-            onPressed: () {
-              showDialog(
-                context: context,
-                builder: (context) {
-                  return QuickAlarmDialog();
-                },
-              );
+      floatingActionButton: FloatingActionButton(
+        // mini: true,
+        shape: const CircleBorder(),
+        onPressed: () {
+          showDialog(
+            context: context,
+            builder: (context) {
+              return QuickAlarmDialog();
             },
-            tooltip: '다른 동작',
-            child: const Icon(Icons.add), // add_circle_rounded 아이콘
-          ),
-        ],
+          );
+        },
+        child: const Icon(Icons.add), // add_circle_rounded 아이콘
       ),
       drawer: const HomeDrawer(), // home_drawer.dart
     );
