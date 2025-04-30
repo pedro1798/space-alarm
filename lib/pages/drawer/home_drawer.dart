@@ -35,7 +35,7 @@ class HomeDrawer extends StatelessWidget {
           ListTile(
             leading: Icon(Icons.dark_mode, color: colorScheme.secondary),
             title: Text(
-              '다크모드',
+              'Dark Mode',
               style: textTheme.bodyLarge?.copyWith(
                 color: colorScheme.onSurface, // 배경에 대비되는 텍스트 색상
               ),
@@ -48,7 +48,7 @@ class HomeDrawer extends StatelessWidget {
               color: colorScheme.secondary,
             ),
             title: Text(
-              '루틴 등록',
+              'Routine list',
               style: textTheme.bodyLarge?.copyWith(
                 color: colorScheme.onSurface,
               ),
