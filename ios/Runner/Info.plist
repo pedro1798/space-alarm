@@ -45,13 +45,15 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>This app always uses location access.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Location access is required while using the app.</string>
+	<string>이 앱은 지오펜싱 알람 기능을 위해 위치 정보를 사용합니다.</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>이 앱은 백그라운드에서도 위치 정보를 사용합니다.</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>지오펜싱 알람을 위해 항상 위치 정보를 허용해주세요.</string>
 	<key>UIBackgroundModes</key>
 	<array>
-  		<string>location</string>
+    	<string>location</string>
 	</array>
 </dict>
 </plist>
