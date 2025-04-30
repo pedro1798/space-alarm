@@ -81,7 +81,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           const SizedBox(width: 8), // 버튼 사이 간격
           FloatingActionButton(
-            // 설정 버튼
+            // 설정 버튼 - add 버튼 분리하기
             mini: true,
             shape: const CircleBorder(),
             onPressed: () {
