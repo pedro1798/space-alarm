@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:plata/controllers/theme_controller.dart';
 import 'package:plata/pages/settings_page.dart';
+import 'package:plata/pages/geofense_page.dart';
 import 'package:get/get.dart';
 
 class HomeDrawer extends StatelessWidget {
@@ -29,10 +30,11 @@ class HomeDrawer extends StatelessWidget {
           ListTile(
             title: const Text('루틴 등록'),
             onTap: () {
-              // Update the state of the app
-              // ...
-              // Then close the drawer
-              Navigator.pop(context);
+              Navigator.push(
+                // Navigate to the settings page
+                context,
+                MaterialPageRoute(builder: (context) => GeofencePage()),
+              );
             },
           ),
           ListTile(
