@@ -1,4 +1,4 @@
-import 'package:plata/models/my_location_repository.dart';
+import 'package:plata/models/location_repository.dart';
 import 'package:native_geofence/native_geofence.dart' as geo;
 
 // 초기화 (앱 시작 시 한 번만 호출해줘야 한다.)
