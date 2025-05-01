@@ -35,9 +35,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    // final controller = Get.put(HomeController());
-    // 필요하면 주석 해제
-
     return Scaffold(
       appBar: AppBar(
         // AppBar는 Material Design의 앱 바를 구현한 위젯입니다.
