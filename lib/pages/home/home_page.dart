@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:plata/pages/drawer/home_drawer.dart';
 import 'package:plata/widgets/home/quick_alarm_dialog.dart';
+import 'package:plata/widgets/location_register_widget.dart';
 import 'package:plata/handers/geofence_register.dart' as geofenceRegister;
 
 class MyHomePage extends StatefulWidget {
@@ -44,41 +45,12 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Center(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment:
-                CrossAxisAlignment.stretch, // 가로로 늘려서 필드들이 동일한 너비를 갖도록 함
-            children: <Widget>[
-              TextField(
-                controller: _latitudeController,
-                decoration: InputDecoration(labelText: '위도'),
-                keyboardType: TextInputType.numberWithOptions(decimal: true),
-              ),
-              SizedBox(height: 16), // 텍스트필드 사이 간격
-              TextField(
-                controller: _longitudeController,
-                decoration: InputDecoration(labelText: '경도'),
-                keyboardType: TextInputType.numberWithOptions(decimal: true),
-              ),
-              SizedBox(height: 16), // 텍스트필드 사이 간격
-              TextField(
-                controller: _radiusController,
-                decoration: InputDecoration(labelText: '반경 (미터)'),
-                keyboardType: TextInputType.numberWithOptions(decimal: true),
-              ),
-              SizedBox(height: 16),
-              ElevatedButton(
-                onPressed: () async {
-                  await geofenceRegister.registerGeofence(
-                    lat: _latitudeController.text,
-                    long: _longitudeController.text,
-                    rad: _radiusController.text,
-                  );
-                },
-                child: Text('지오펜스 등록'),
-              ),
-            ],
+          child: LocationRegisterWidget(
+            latController: _latitudeController,
+            longController: _longitudeController,
+            radController: _radiusController,
           ),
+          // LocationRegisterWidget은 위치 등록을 위한 위젯입니다.
         ),
       ),
       floatingActionButton: FloatingActionButton(

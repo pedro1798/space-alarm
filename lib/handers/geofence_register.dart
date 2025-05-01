@@ -42,12 +42,6 @@ Future<void> registerGeofence({
     print('유효하지 않은 좌표입니다.');
     return;
   }
-  /*
-  _latitudeController.text
-  _longitudeController.text
-  _radiusController.text 
-  로 입력 받으면 된다
-  */
 
   if (latitude == null || longitude == null || radiusValue == null) {
     print('유효한 값을 입력하세요.');
@@ -78,5 +72,5 @@ Future<void> registerGeofence({
     _geofenceCallback,
   );
   savedLocations.add(userLocation); // 위치 저장
-  // print('지오펜스가 등록되었고 위치도 저장되었습니다.');
+  print('지오펜스가 등록되었고 위치도 저장되었습니다.');
 }
