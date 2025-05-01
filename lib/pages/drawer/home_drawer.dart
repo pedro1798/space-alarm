@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:plata/controllers/theme_controller.dart';
 import 'package:plata/pages/settings_page.dart';
-import 'package:plata/pages/geofense_page.dart';
+import 'package:plata/pages/map_page.dart';
 import 'package:get/get.dart';
 
 class HomeDrawer extends StatelessWidget {
@@ -56,7 +56,7 @@ class HomeDrawer extends StatelessWidget {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => GeofencePage()),
+                MaterialPageRoute(builder: (context) => MapPage()),
               );
             },
           ),
