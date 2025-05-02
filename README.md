@@ -1,6 +1,6 @@
 # plata
 
-A new Flutter project.
+native_geofence를 이용해 목적지에 다다르면 알람, ToDo 알림 등 기능을 수행하는 어플리케이션입니다.
 
 ## Getting Started
 
