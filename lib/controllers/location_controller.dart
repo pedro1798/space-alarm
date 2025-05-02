@@ -7,7 +7,7 @@ class LocationController extends GetxController {
   RxList<StoredLocation> locations = <StoredLocation>[].obs;
 
   // 로딩 여부 (선택적)
-  // RxBool isLoading = true.obs;
+  RxBool isLoading = true.obs;
 
   @override
   void onInit() {
@@ -16,8 +16,10 @@ class LocationController extends GetxController {
   }
 
   void loadLocations() async {
+    isLoading.value = true; // 로딩 시작
     final data = await LocationDatabase.getLocations();
     locations.value = data;
+    isLoading.value = false; // 로딩 완료
   }
 
   Future<void> deleteLocation(String id) async {
