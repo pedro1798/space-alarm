@@ -17,52 +17,67 @@ class LocationRegisterWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment:
-          CrossAxisAlignment.stretch, // 가로로 늘려서 필드들이 동일한 너비를 갖도록 함
-      children: <Widget>[
-        TextField(
-          controller: nameController,
-          decoration: const InputDecoration(labelText: 'Name'),
+    return Card(
+      margin: const EdgeInsets.all(16),
+      elevation: 4,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          mainAxisSize: MainAxisSize.min, // 내용에 맞게 크기 조절
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            TextField(
+              controller: nameController,
+              decoration: const InputDecoration(labelText: 'Name'),
+            ),
+            const SizedBox(height: 12),
+            TextField(
+              controller: latController,
+              decoration: const InputDecoration(labelText: 'Latitude'),
+              keyboardType: const TextInputType.numberWithOptions(
+                decimal: true,
+              ),
+            ),
+            const SizedBox(height: 12),
+            TextField(
+              controller: longController,
+              decoration: const InputDecoration(labelText: 'Longitude'),
+              keyboardType: const TextInputType.numberWithOptions(
+                decimal: true,
+              ),
+            ),
+            const SizedBox(height: 12),
+            TextField(
+              controller: radController,
+              decoration: const InputDecoration(labelText: 'Radius (meters)'),
+              keyboardType: const TextInputType.numberWithOptions(
+                decimal: true,
+              ),
+            ),
+            const SizedBox(height: 20),
+            ElevatedButton.icon(
+              onPressed: () async {
+                await geofenceRegister.registerGeofence(
+                  name: nameController.text,
+                  lat: latController.text,
+                  long: longController.text,
+                  rad: radController.text,
+                );
+                nameController.clear();
+                latController.clear();
+                longController.clear();
+                radController.clear();
+              },
+              icon: const Icon(Icons.add_location_alt),
+              label: const Text('Register Geofence'),
+              style: ElevatedButton.styleFrom(
+                padding: const EdgeInsets.symmetric(vertical: 14),
+              ),
+            ),
+          ],
         ),
-        const SizedBox(height: 16), // 텍스트필드 사이 간격
-        TextField(
-          controller: latController,
-          decoration: const InputDecoration(labelText: 'Latitude'),
-          keyboardType: const TextInputType.numberWithOptions(decimal: true),
-        ),
-        const SizedBox(height: 16), // 텍스트필드 사이 간격
-        TextField(
-          controller: longController,
-          decoration: const InputDecoration(labelText: 'Longitude'),
-          keyboardType: const TextInputType.numberWithOptions(decimal: true),
-        ),
-        const SizedBox(height: 16), // 텍스트필드 사이 간격
-        TextField(
-          controller: radController,
-          decoration: const InputDecoration(labelText: 'Radius (meters)'),
-          keyboardType: const TextInputType.numberWithOptions(decimal: true),
-        ),
-        const SizedBox(height: 16), // 텍스트필드 사이 간격
-        ElevatedButton(
-          onPressed: () async {
-            await geofenceRegister.registerGeofence(
-              name: nameController.text,
-              lat: latController.text,
-              long: longController.text,
-              rad: radController.text,
-            );
-            // 🔽 등록 후 입력 필드 초기화
-            nameController.clear();
-            latController.clear();
-            longController.clear();
-            radController.clear();
-          },
-
-          child: const Text('register geofence'),
-        ),
-      ],
+      ),
     );
   }
 }
