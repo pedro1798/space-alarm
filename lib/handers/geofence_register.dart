@@ -1,5 +1,8 @@
-import 'package:plata/models/location_repository.dart';
 import 'package:native_geofence/native_geofence.dart' as geo;
+// import 'package:plata/services/location_db.dart';
+import 'package:plata/models/stored_location.dart';
+import 'package:get/get.dart';
+import 'package:plata/controllers/location_controller.dart';
 
 // 초기화 (앱 시작 시 한 번만 호출해줘야 한다.)
 Future<void> initializeGeofence() async {
@@ -13,7 +16,14 @@ Future<void> _geofenceCallback(geo.GeofenceCallbackParams params) async {
 
   if (location == null) return;
 
-  print('지오펜스 이벤트 발생: $event @ ${location.latitude}, ${location.longitude}');
+  Get.snackbar(
+    '지오펜스 이벤트 발생',
+    '$event @ ${location.latitude}, ${location.longitude}',
+    snackPosition: SnackPosition.BOTTOM,
+    duration: Duration(seconds: 2),
+  );
+  return;
+
   /*
   실제 앱에서는 여기에 알림 전송/DB 업데이트 등의 로직 추가
   if (event == GeofenceEvent.enter) {
@@ -30,6 +40,7 @@ Future<void> registerGeofence({
   required long,
   required rad,
 }) async {
+  final LocationController locCtrl = Get.find<LocationController>();
   final double? latitude = double.tryParse(lat.toString());
   final double? longitude = double.tryParse(long.toString());
   final double? radiusValue = double.tryParse(rad.toString());
@@ -39,12 +50,22 @@ Future<void> registerGeofence({
       latitude! > 90 ||
       longitude! < -180 ||
       longitude! > 180) {
-    print('유효하지 않은 좌표입니다.');
+    Get.snackbar(
+      '잘못된 입력',
+      '유효하지 않는 위도/경도입니다.',
+      snackPosition: SnackPosition.BOTTOM,
+      duration: Duration(seconds: 2),
+    );
     return;
   }
 
   if (latitude == null || longitude == null || radiusValue == null) {
-    print('유효한 값을 입력하세요.');
+    Get.snackbar(
+      '잘못된 입력',
+      '입력란에 공백이 있습니다.',
+      snackPosition: SnackPosition.BOTTOM,
+      duration: Duration(seconds: 2),
+    );
     return;
   }
   final geo.Location userLocation = geo.Location(
@@ -71,6 +92,13 @@ Future<void> registerGeofence({
     geofence,
     _geofenceCallback,
   );
-  savedLocations.add(userLocation); // 위치 저장
-  print('지오펜스가 등록되었고 위치도 저장되었습니다.');
+  // savedLocations.add(userLocation); // 위치 저장
+  await locCtrl.addLocation(
+    StoredLocation(
+      id: geofence.id,
+      latitude: latitude,
+      longitude: longitude,
+      radius: radiusValue,
+    ),
+  );
 }
