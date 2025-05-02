@@ -3,54 +3,79 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:get/get.dart';
 import 'package:plata/controllers/location_controller.dart';
+import 'package:plata/utils/geo.helper.dart';
 
 class FlutterMapWidget extends StatefulWidget {
   const FlutterMapWidget({super.key});
 
   @override
   State<FlutterMapWidget> createState() => _FlutterMapWidgetState();
-  // StatefulWidget이 처음 빌드될 때 자동으로 호출
 }
 
 class _FlutterMapWidgetState extends State<FlutterMapWidget> {
   final MapController mapController = MapController();
   final LocationController locationController = Get.find<LocationController>();
-  // MapController는 FlutterMap의 상태를 관리하는 컨트롤러입니다.
-  // MapController를 사용하면 지도 중심 좌표, 줌 레벨 등을 제어할 수 있습니다.
-
-  @override
-  initState() {
-    super.initState();
-  }
-
-  /* @override
-  void dispose() {
-    super.dispose();
-  } */
 
   @override
   Widget build(BuildContext context) {
-    return FlutterMap(
-      options: MapOptions(
-        initialCenter: LatLng(35.889230, 128.610263), // 경북대학교 좌표
-        initialZoom: 13.0,
-      ),
-      children: [
-        TileLayer(
-          urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-          userAgentPackageName: 'com.example.app',
+    return Obx(() {
+      if (locationController.isLoading.value) {
+        return const Center(child: CircularProgressIndicator());
+      }
+
+      return FlutterMap(
+        mapController: mapController,
+        options: MapOptions(
+          initialCenter: LatLng(35.889230, 128.610263), // 초기 위치: 경북대학교
+          initialZoom: 16.2,
         ),
-        MarkerLayer(
-          markers: [
-            Marker(
-              point: LatLng(35.889230, 128.610263),
-              width: 80,
-              height: 80,
-              child: Icon(Icons.location_pin, color: Colors.red, size: 40),
-            ),
-          ],
-        ),
-      ],
-    );
+        children: [
+          TileLayer(
+            urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+            userAgentPackageName: 'com.example.app',
+          ),
+          MarkerLayer(
+            markers:
+                locationController.locations.map((loc) {
+                  return Marker(
+                    point: LatLng(loc.latitude, loc.longitude),
+                    width: 80,
+                    height: 80,
+                    child: IconButton(
+                      icon: const Icon(Icons.location_on, color: Colors.red),
+                      onPressed: () {
+                        Get.defaultDialog(
+                          title: '지오펜스 삭제',
+                          middleText: '정말로 삭제하시겠습니까?',
+                          textConfirm: '삭제',
+                          textCancel: '취소',
+                          onConfirm: () {
+                            locationController.deleteLocation(loc.id);
+                            Get.back();
+                          },
+                        );
+                      },
+                    ),
+                  );
+                }).toList(),
+          ),
+          PolygonLayer(
+            polygons:
+                locationController.locations.map((loc) {
+                  return Polygon(
+                    points: createCirclePoints(
+                      LatLng(loc.latitude, loc.longitude),
+                      loc.radius,
+                      64,
+                    ),
+                    color: Colors.transparent,
+                    borderColor: Colors.blue,
+                    borderStrokeWidth: 2,
+                  );
+                }).toList(),
+          ),
+        ],
+      );
+    });
   }
 }
