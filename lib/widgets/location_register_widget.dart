@@ -53,7 +53,13 @@ class LocationRegisterWidget extends StatelessWidget {
               long: longController.text,
               rad: radController.text,
             );
+            // 🔽 등록 후 입력 필드 초기화
+            nameController.clear();
+            latController.clear();
+            longController.clear();
+            radController.clear();
           },
+
           child: const Text('register geofence'),
         ),
       ],

@@ -10,10 +10,12 @@ class LocationListWidget extends StatelessWidget {
     final LocationController controller = Get.find<LocationController>();
 
     return Obx(() {
-      if (controller.isLoading.value) {
+      /*
+      // Uncomment this if you want to show a loading indicator while fetching locations
+      if (controller.isLoading.value) { 
         return const Center(child: CircularProgressIndicator());
       }
-
+      */
       final locations = controller.locations;
 
       if (locations.isEmpty) {

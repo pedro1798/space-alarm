@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:plata/widgets/flutter_map_widget.dart';
 
 class MapPage extends StatelessWidget {
+  const MapPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
