@@ -19,7 +19,8 @@ class LocationDatabase {
             id TEXT PRIMARY KEY,
             latitude REAL,
             longitude REAL,
-            radius REAL
+            radius REAL,
+            name TEXT
           )
         ''');
       },
