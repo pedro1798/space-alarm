@@ -3,7 +3,8 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:get/get.dart';
 import 'package:plata/controllers/location_controller.dart';
-import 'package:plata/utils/geo.helper.dart';
+import 'package:plata/widgets/geofences/geofence_circle.dart';
+import 'package:plata/widgets/geofences/geofence_marker.dart';
 
 class FlutterMapWidget extends StatefulWidget {
   const FlutterMapWidget({super.key});
@@ -36,43 +37,13 @@ class _FlutterMapWidgetState extends State<FlutterMapWidget> {
           ),
           MarkerLayer(
             markers:
-                locationController.locations.map((loc) {
-                  return Marker(
-                    point: LatLng(loc.latitude, loc.longitude),
-                    width: 80,
-                    height: 80,
-                    child: IconButton(
-                      icon: const Icon(Icons.location_on, color: Colors.red),
-                      onPressed: () {
-                        Get.defaultDialog(
-                          title: '지오펜스 삭제',
-                          middleText: '정말로 삭제하시겠습니까?',
-                          textConfirm: '삭제',
-                          textCancel: '취소',
-                          onConfirm: () {
-                            locationController.deleteLocation(loc.id);
-                            Get.back();
-                          },
-                        );
-                      },
-                    ),
-                  );
-                }).toList(),
+                locationController.locations.map(buildGeofenceMarker).toList(),
           ),
           PolygonLayer(
             polygons:
-                locationController.locations.map((loc) {
-                  return Polygon(
-                    points: createCirclePoints(
-                      LatLng(loc.latitude, loc.longitude),
-                      loc.radius,
-                      64,
-                    ),
-                    color: Colors.transparent,
-                    borderColor: Colors.blue,
-                    borderStrokeWidth: 2,
-                  );
-                }).toList(),
+                locationController.locations
+                    .map((loc) => GeofenceCircle.fromLocation(loc))
+                    .toList(),
           ),
         ],
       );
