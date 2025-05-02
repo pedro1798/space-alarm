@@ -5,6 +5,7 @@ import 'pages/home/home_page.dart';
 import 'themes/app_theme.dart';
 import 'package:native_geofence/native_geofence.dart';
 import 'handers/location_permission_hander.dart';
+import 'package:plata/controllers/location_controller.dart';
 
 void main() async {
   Get.put(ThemeController()); // 의존성 주입
@@ -12,6 +13,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await requestLocationPermissions(); // 먼저 위치 권한 요청
   await NativeGeofenceManager.instance.initialize(); // 그다음 초기화
+  Get.put(LocationController()); // LocationController 의존성 주입
   runApp(const MyApp());
 }
 
