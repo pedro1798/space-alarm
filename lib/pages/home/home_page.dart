@@ -3,6 +3,7 @@ import 'package:plata/pages/drawer/home_drawer.dart';
 import 'package:plata/widgets/home/quick_alarm_dialog.dart';
 import 'package:plata/widgets/location_register_widget.dart';
 import 'package:plata/handers/geofence_register.dart' as geofenceRegister;
+import 'package:plata/widgets/location_list_widget.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title}); // MyHomePage 생성자
@@ -42,13 +43,26 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: Theme.of(context).colorScheme.primary,
         title: Text(widget.title),
       ),
+      drawer: const HomeDrawer(),
       body: Center(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
-          child: LocationRegisterWidget(
-            latController: _latitudeController,
-            longController: _longitudeController,
-            radController: _radiusController,
+          child: Column(
+            children: [
+              // 위치 등록 위젯
+              LocationRegisterWidget(
+                latController: _latitudeController,
+                longController: _longitudeController,
+                radController: _radiusController,
+              ),
+              const SizedBox(height: 16),
+              const Divider(),
+              const SizedBox(height: 8),
+              const Text('저장된 위치 목록', style: TextStyle(fontSize: 16)),
+              const SizedBox(height: 8),
+              // 리스트를 Expanded로 감싸서 남은 공간 모두 사용
+              const Expanded(child: LocationListWidget()),
+            ],
           ),
           // LocationRegisterWidget은 위치 등록을 위한 위젯입니다.
         ),
@@ -65,8 +79,7 @@ class _MyHomePageState extends State<MyHomePage> {
           );
         },
         child: const Icon(Icons.add), // add_circle_rounded 아이콘
-      ),
-      drawer: const HomeDrawer(), // home_drawer.dart
+      ), // home_drawer.dart
     );
   }
 }
