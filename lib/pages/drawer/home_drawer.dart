@@ -3,6 +3,7 @@ import 'package:plata/controllers/theme_controller.dart';
 import 'package:plata/pages/settings_page.dart';
 import 'package:plata/pages/map_page.dart';
 import 'package:get/get.dart';
+import 'package:plata/utils/nevigation_helper.dart' as nh;
 
 class HomeDrawer extends StatelessWidget {
   const HomeDrawer({super.key});
@@ -54,11 +55,7 @@ class HomeDrawer extends StatelessWidget {
               ),
             ),
             onTap: () {
-              Navigator.pop(context); // Drawer 닫기
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => MapPage()),
-              );
+              nh.safeNavigatePush(context: context, page: MapPage());
             },
           ),
           ListTile(
@@ -70,11 +67,7 @@ class HomeDrawer extends StatelessWidget {
               ),
             ),
             onTap: () {
-              Navigator.pop(context); // Drawer 닫기
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const SettingPage()),
-              );
+              nh.safeNavigatePush(context: context, page: SettingPage());
             },
           ),
         ],
