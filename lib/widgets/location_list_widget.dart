@@ -23,6 +23,8 @@ class LocationListWidget extends StatelessWidget {
       }
 
       return ListView.builder(
+        shrinkWrap: true, // ListView의 크기를 자식 위젯에 맞게 조정
+        physics: const NeverScrollableScrollPhysics(), // 부모 스크롤 위젯에 위임
         itemCount: locations.length,
         itemBuilder: (context, index) {
           final loc = locations[index];
@@ -34,7 +36,19 @@ class LocationListWidget extends StatelessWidget {
             ),
             trailing: IconButton(
               icon: const Icon(Icons.delete, color: Colors.red),
-              onPressed: () => controller.deleteLocation(loc.id),
+              onPressed: () {
+                Get.defaultDialog(
+                  title: "Delete Location",
+                  middleText: "Are you sure you want to delete this location?",
+                  textCancel: "Cancel",
+                  textConfirm: "Delete",
+                  confirmTextColor: Colors.white,
+                  onConfirm: () {
+                    controller.deleteLocation(loc.id);
+                    Get.back(); // 다이얼로그 닫기
+                  },
+                );
+              },
             ),
           );
         },

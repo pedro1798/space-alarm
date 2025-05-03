@@ -68,6 +68,7 @@ class LocationRegisterWidget extends StatelessWidget {
                 latController.clear();
                 longController.clear();
                 radController.clear();
+                FocusScope.of(context).unfocus();
               },
               icon: const Icon(Icons.add_location_alt),
               label: const Text('Register Geofence'),
