@@ -26,26 +26,29 @@ class _SettingPageState extends State<SettingPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Settings')),
-      body: ListView(
-        children: [
-          const SizedBox(height: 20),
-          ListTile(
-            title: Text(email),
-            trailing: IconButton(
-              icon: const Icon(Icons.copy),
-              tooltip: "Click to copy the text.",
-              onPressed: () => _copyToClipboard(email),
+      body: SafeArea(
+        // 여기에 적용
+        child: ListView(
+          children: [
+            const SizedBox(height: 20),
+            ListTile(
+              title: Text(email),
+              trailing: IconButton(
+                icon: const Icon(Icons.copy),
+                tooltip: "Click to copy the text.",
+                onPressed: () => _copyToClipboard(email),
+              ),
             ),
-          ),
-          ListTile(
-            title: Text(github),
-            trailing: IconButton(
-              icon: const Icon(Icons.copy),
-              tooltip: "Click to copy the text.",
-              onPressed: () => _copyToClipboard(github),
+            ListTile(
+              title: Text(github),
+              trailing: IconButton(
+                icon: const Icon(Icons.copy),
+                tooltip: "Click to copy the text.",
+                onPressed: () => _copyToClipboard(github),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

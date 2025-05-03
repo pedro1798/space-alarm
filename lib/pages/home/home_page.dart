@@ -37,30 +37,41 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true, // 키보드가 올라올 때 화면 크기 조정
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.primary,
         title: Text(widget.title),
       ),
       drawer: const HomeDrawer(),
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 16.0),
-          child: Column(
-            children: [
-              // 이름, 위도, 경도, 반경 입력 필드
-              LocationRegisterWidget(
-                latController: _latitudeController,
-                longController: _longitudeController,
-                radController: _radiusController,
-                nameController: _nameController, // 이름 컨트롤러 전달
+      body: SingleChildScrollView(
+        child: SafeArea(
+          child: Center(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 8.0,
+                vertical: 16.0,
               ),
-              const SizedBox(height: 16),
-              const Divider(),
-              const SizedBox(height: 8),
-              const Text('저장된 위치 목록', style: TextStyle(fontSize: 16)),
-              const SizedBox(height: 8),
-              const Expanded(child: LocationListWidget()),
-            ],
+              child: Column(
+                children: [
+                  LocationRegisterWidget(
+                    latController: _latitudeController,
+                    longController: _longitudeController,
+                    radController: _radiusController,
+                    nameController: _nameController,
+                  ),
+                  const SizedBox(height: 16),
+                  const Divider(),
+                  const SizedBox(height: 8),
+                  const Text('저장된 위치 목록', style: TextStyle(fontSize: 16)),
+                  const SizedBox(height: 8),
+                  SizedBox(
+                    // ✅ Expanded → SizedBox
+                    height: 300, // 적절한 높이로 조정
+                    child: const LocationListWidget(),
+                  ),
+                ],
+              ),
+            ),
           ),
         ),
       ),
