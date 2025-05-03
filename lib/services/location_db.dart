@@ -13,19 +13,63 @@ class LocationDatabase {
     _database = await openDatabase(
       path,
       version: 1,
-      onCreate: (db, version) {
-        return db.execute('''
-          CREATE TABLE locations (
-            id TEXT PRIMARY KEY,
-            latitude REAL,
-            longitude REAL,
-            radius REAL,
-            name TEXT
-          )
-        ''');
+      onCreate: (db, version) async {
+        await db.execute('''
+        CREATE TABLE locations (
+          id TEXT PRIMARY KEY,
+          latitude REAL,
+          longitude REAL,
+          radius REAL,
+          name TEXT
+        )
+      ''');
+        // 초기 위치들 삽입 - 앱 최초 실행 시에만
+        await _insertInitialLocations(db);
       },
     );
     return _database!;
+  }
+
+  /// 초기 위치 데이터 삽입
+  static Future<void> _insertInitialLocations(Database db) async {
+    final initialLocations = [
+      StoredLocation(
+        id: 'KNU',
+        latitude: 35.889230,
+        longitude: 128.612130,
+        radius: 100.0,
+        name: 'Kyungpook National University',
+      ),
+      StoredLocation(
+        id: 'Mumbai',
+        latitude: 19.080699742323194,
+        longitude: 72.87755370249461,
+        radius: 150.0,
+        name: 'Mumbai',
+      ),
+      StoredLocation(
+        id: 'Singapore',
+        latitude: 1.359908148594163,
+        longitude: 103.83159684467597,
+        radius: 150.0,
+        name: 'Singapore',
+      ),
+      StoredLocation(
+        id: 'HongKong',
+        latitude: 22.33739881289833,
+        longitude: 114.16822767232853,
+        radius: 150.0,
+        name: 'HongKong',
+      ),
+    ];
+
+    for (final loc in initialLocations) {
+      await db.insert(
+        'locations',
+        loc.toMap(),
+        conflictAlgorithm: ConflictAlgorithm.ignore, // 이미 있으면 무시
+      );
+    }
   }
 
   static Future<void> insertLocation(StoredLocation location) async {
