@@ -43,9 +43,11 @@ class LocationListWidget extends StatelessWidget {
                   textCancel: "Cancel",
                   textConfirm: "Delete",
                   confirmTextColor: Colors.white,
-                  onConfirm: () {
-                    controller.deleteLocation(loc.id);
-                    Get.back(); // 다이얼로그 닫기
+                  onConfirm: () async {
+                    await controller.deleteLocation(loc.id);
+                    // 모든 오버레이를 닫아 다이얼로그를 종료
+                    Get.back(closeOverlays: true);
+                    // Get.close(1); // 다이얼로그를 닫고 1개 스택을 제거
                   },
                 );
               },
