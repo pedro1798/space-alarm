@@ -54,6 +54,7 @@ class HomeDrawer extends StatelessWidget {
               ),
             ),
             onTap: () {
+              Navigator.pop(context); // Drawer 닫기
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => MapPage()),
@@ -69,6 +70,7 @@ class HomeDrawer extends StatelessWidget {
               ),
             ),
             onTap: () {
+              Navigator.pop(context); // Drawer 닫기
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => const SettingPage()),
