@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class MyTheme {
   static ThemeData get lightTheme {
     final colorScheme = ColorScheme.fromSeed(
-      seedColor: const Color(0xFFCCFF90),
+      seedColor: const Color.fromARGB(255, 62, 151, 186),
       // seedColor만 바꾸면 다른 색상으로 자동 생성됨
       brightness: Brightness.light,
     );
@@ -57,7 +57,8 @@ class MyTheme {
 
   static ThemeData get darkTheme {
     final colorScheme = ColorScheme.fromSeed(
-      seedColor: const Color(0xFFCCFF90),
+      // seedColor: const Color(0xFFCCFF90),
+      seedColor: const Color.fromARGB(255, 62, 151, 186),
       brightness: Brightness.dark,
     );
 
