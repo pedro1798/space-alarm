@@ -6,6 +6,10 @@ class LocationRegisterWidget extends StatelessWidget {
   final TextEditingController latController;
   final TextEditingController longController;
   final TextEditingController radController;
+  final FocusNode nameFocusNode;
+  final FocusNode latFocusNode;
+  final FocusNode longFocusNode;
+  final FocusNode radFocusNode;
 
   const LocationRegisterWidget({
     super.key,
@@ -13,6 +17,10 @@ class LocationRegisterWidget extends StatelessWidget {
     required this.latController,
     required this.longController,
     required this.radController,
+    required this.nameFocusNode,
+    required this.latFocusNode,
+    required this.longFocusNode,
+    required this.radFocusNode,
   });
 
   @override
@@ -28,12 +36,16 @@ class LocationRegisterWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             TextField(
+              autofocus: false, // 키보드 자동 활성화 방지
               controller: nameController,
+              focusNode: nameFocusNode,
               decoration: const InputDecoration(labelText: 'Name'),
             ),
             const SizedBox(height: 12),
             TextField(
+              autofocus: false, // 키보드 자동 활성화 방지
               controller: latController,
+              focusNode: latFocusNode,
               decoration: const InputDecoration(labelText: 'Latitude'),
               keyboardType: const TextInputType.numberWithOptions(
                 decimal: true,
@@ -41,7 +53,9 @@ class LocationRegisterWidget extends StatelessWidget {
             ),
             const SizedBox(height: 12),
             TextField(
+              autofocus: false, // 키보드 자동 활성화 방지
               controller: longController,
+              focusNode: longFocusNode,
               decoration: const InputDecoration(labelText: 'Longitude'),
               keyboardType: const TextInputType.numberWithOptions(
                 decimal: true,
@@ -49,7 +63,9 @@ class LocationRegisterWidget extends StatelessWidget {
             ),
             const SizedBox(height: 12),
             TextField(
+              autofocus: false, // 키보드 자동 활성화 방지
               controller: radController,
+              focusNode: radFocusNode,
               decoration: const InputDecoration(labelText: 'Radius (meters)'),
               keyboardType: const TextInputType.numberWithOptions(
                 decimal: true,
