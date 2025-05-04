@@ -10,12 +10,6 @@ class LocationListWidget extends StatelessWidget {
     final LocationController controller = Get.find<LocationController>();
 
     return Obx(() {
-      /*
-      // Uncomment this if you want to show a loading indicator while fetching locations
-      if (controller.isLoading.value) { 
-        return const Center(child: CircularProgressIndicator());
-      }
-      */
       final locations = controller.locations;
 
       if (locations.isEmpty) {
@@ -23,8 +17,7 @@ class LocationListWidget extends StatelessWidget {
       }
 
       return ListView.builder(
-        shrinkWrap: true, // ListView의 크기를 자식 위젯에 맞게 조정
-        physics: const NeverScrollableScrollPhysics(), // 부모 스크롤 위젯에 위임
+        // 부모 스크롤 위젯에 위임
         itemCount: locations.length,
         itemBuilder: (context, index) {
           final loc = locations[index];
@@ -45,9 +38,7 @@ class LocationListWidget extends StatelessWidget {
                   confirmTextColor: Colors.white,
                   onConfirm: () async {
                     await controller.deleteLocation(loc.id);
-                    // 모든 오버레이를 닫아 다이얼로그를 종료
-                    Get.back(closeOverlays: true);
-                    // Get.close(1); // 다이얼로그를 닫고 1개 스택을 제거
+                    Get.close(1); // 다이얼로그를 닫고 1개 스택을 제거
                   },
                 );
               },
