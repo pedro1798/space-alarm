@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:plata/pages/drawer/home_drawer.dart';
 import 'package:plata/widgets/home/quick_alarm_dialog.dart';
-import 'package:plata/widgets/location_register_widget.dart';
-import 'package:plata/handers/geofence_register.dart' as geofenceRegister;
 import 'package:plata/widgets/location_list_widget.dart';
+import 'package:plata/widgets/location_input_section.dart';
+import 'package:plata/handers/geofence_register.dart' as geofenceRegister;
+import 'package:plata/utils/focus_hepler.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
@@ -14,14 +15,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final _latitudeController = TextEditingController();
-  final _longitudeController = TextEditingController();
-  final _radiusController = TextEditingController();
-  final _nameController = TextEditingController(); // 이름 입력 필드 추가
-  final _nameFocusNode = FocusNode();
-  final _latFocusNode = FocusNode();
-  final _longFocusNode = FocusNode();
-  final _radFocusNode = FocusNode();
+  FocusHelper? _focusHelper;
 
   @override
   void initState() {
@@ -29,32 +23,20 @@ class _MyHomePageState extends State<MyHomePage> {
     geofenceRegister.initializeGeofence();
   }
 
-  @override
-  void dispose() {
-    _latitudeController.dispose();
-    _longitudeController.dispose();
-    _radiusController.dispose();
-    _nameController.dispose();
-
-    _nameFocusNode.dispose();
-    _latFocusNode.dispose();
-    _longFocusNode.dispose();
-    _radFocusNode.dispose();
-
-    super.dispose();
+  void _unfocusAll() {
+    _focusHelper?.unfocusAll();
   }
 
-  void _unfocusAll() {
-    _nameFocusNode.unfocus();
-    _latFocusNode.unfocus();
-    _longFocusNode.unfocus();
-    _radFocusNode.unfocus();
+  @override
+  void dispose() {
+    _focusHelper?.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: true, // 키보드가 올라올 때 화면 크기 조정
+      resizeToAvoidBottomInset: true,
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.primary,
         title: Text(widget.title),
@@ -62,52 +44,43 @@ class _MyHomePageState extends State<MyHomePage> {
       drawer: const HomeDrawer(),
       onDrawerChanged: (_) {
         WidgetsBinding.instance.addPostFrameCallback((_) {
-          _unfocusAll(); // 포커스 완전 제거
+          _unfocusAll();
         });
       },
       body: GestureDetector(
-        onTap: () => _unfocusAll(),
-        child: SingleChildScrollView(
-          child: SafeArea(
-            child: Center(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 8.0,
-                  vertical: 16.0,
+        onTap: _unfocusAll,
+        child: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 8.0,
+              vertical: 16.0,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                LocationInputSection(
+                  focusHelperSetter: (helper) => _focusHelper = helper,
+                  // focusHelperSetter 매개변수에 (helper) => _focusHelper = helper, 매개변수를 전달
+                  // (helper) => _focusHelper = helper,는 람다식으로,
+                  // LocationInputSection에서 생성한 FocusHelper 객체를 매개변수로 받아(helper) _focusHelper에 할당
                 ),
-                child: Column(
-                  children: [
-                    LocationRegisterWidget(
-                      latController: _latitudeController,
-                      longController: _longitudeController,
-                      radController: _radiusController,
-                      nameController: _nameController,
-                      nameFocusNode: _nameFocusNode,
-                      latFocusNode: _latFocusNode,
-                      longFocusNode: _longFocusNode,
-                      radFocusNode: _radFocusNode,
-                    ),
-                    const SizedBox(height: 16),
-                    const Divider(),
-                    const SizedBox(height: 8),
-                    const Text('저장된 위치 목록', style: TextStyle(fontSize: 16)),
-                    const SizedBox(height: 8),
-                    SizedBox(height: 300, child: const LocationListWidget()),
-                  ],
-                ),
-              ),
+                const SizedBox(height: 16),
+                const Divider(),
+                const SizedBox(height: 8),
+                const Text('저장된 위치 목록', style: TextStyle(fontSize: 16)),
+                const SizedBox(height: 8),
+                const Expanded(child: LocationListWidget()),
+              ],
             ),
           ),
         ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          _unfocusAll(); // 포커스 완전 제거
+          _unfocusAll();
           showDialog(
             context: context,
-            builder: (context) {
-              return QuickAlarmDialog();
-            },
+            builder: (context) => const QuickAlarmDialog(),
           );
         },
         child: const Icon(Icons.add),
