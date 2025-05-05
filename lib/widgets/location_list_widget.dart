@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plata/controllers/location_controller.dart';
+import 'package:plata/models/stored_location.dart';
 
 class LocationListWidget extends StatelessWidget {
-  const LocationListWidget({super.key});
+  final void Function(StoredLocation location)? onLocationTap;
+  const LocationListWidget({super.key, this.onLocationTap});
 
   @override
   Widget build(BuildContext context) {
@@ -27,6 +29,9 @@ class LocationListWidget extends StatelessWidget {
             subtitle: Text(
               'Latitude: ${loc.latitude}, Longitude: ${loc.longitude}, Radius: ${loc.radius}m',
             ),
+            onTap: () {
+              onLocationTap?.call(loc); // 콜백 호출
+            },
             trailing: IconButton(
               icon: const Icon(Icons.delete, color: Colors.red),
               onPressed: () {

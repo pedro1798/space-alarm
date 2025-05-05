@@ -45,4 +45,10 @@ class LocationController extends GetxController {
       duration: Duration(seconds: 2),
     );
   }
+
+  Rx<StoredLocation?> selectedLocation = Rx<StoredLocation?>(null);
+
+  void selectLocation(StoredLocation location) {
+    selectedLocation.value = location;
+  }
 }
