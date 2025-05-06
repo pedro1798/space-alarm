@@ -71,4 +71,15 @@ class LocationController extends GetxController {
   void selectLocation(StoredLocation location) {
     selectedLocation.value = location;
   }
+
+  Future<void> toggleAlarm(String id, bool enabled) async {
+    final db = await LocationDatabase.database;
+    await db.update(
+      'locations',
+      {'alarmEnabled': enabled ? 1 : 0},
+      where: 'id = ?',
+      whereArgs: [id],
+    );
+    loadLocations(); // 다시 로드
+  }
 }
