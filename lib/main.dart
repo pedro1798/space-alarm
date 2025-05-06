@@ -4,18 +4,19 @@ import 'package:plata/controllers/theme_controller.dart';
 import 'pages/home/home_page.dart';
 import 'themes/app_theme.dart';
 import 'package:native_geofence/native_geofence.dart';
-import 'handers/location_permission_hander.dart';
+import 'handlers/location_permission_hander.dart';
 import 'package:plata/controllers/location_controller.dart';
-import 'handers/geofence_register.dart';
+import 'handlers/geofence_register.dart';
 
 void main() async {
   // Before accesing any methods ensure you initialize the plugin:
   WidgetsFlutterBinding.ensureInitialized();
+
   Get.put(ThemeController()); // ThemeController 의존성 주입
   Get.put(LocationController()); // LocationController 의존성 주입
-  await initGeofenceSystem();
+
   await requestLocationPermissions(); // 먼저 위치 권한 요청
-  await NativeGeofenceManager.instance.initialize(); // 그다음 초기화R
+  await initGeofenceSystem();
   runApp(const MyApp());
 }
 
