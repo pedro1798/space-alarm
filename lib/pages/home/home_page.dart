@@ -3,7 +3,7 @@ import 'package:plata/pages/drawer/home_drawer.dart';
 import 'package:plata/widgets/home/quick_alarm_dialog.dart';
 import 'package:plata/widgets/location_list_widget.dart';
 import 'package:plata/widgets/location_input_section.dart';
-import 'package:plata/handers/geofence_register.dart' as geofenceRegister;
+import 'package:plata/handlers/geofence_register.dart' as geofenceRegister;
 import 'package:plata/utils/focus_hepler.dart';
 
 class MyHomePage extends StatefulWidget {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:plata/handers/geofence_register.dart' as geofenceRegister;
+import 'package:plata/handlers/geofence_register.dart' as geofenceRegister;
 
 class LocationRegisterWidget extends StatelessWidget {
   final TextEditingController nameController;
