@@ -12,20 +12,26 @@ class LocationDatabase {
 
     _database = await openDatabase(
       path,
-      version: 1,
+      version: 2, // ← alarmEnabled 추가한 후에는 version을 2로
       onCreate: (db, version) async {
         await db.execute('''
-        CREATE TABLE locations (
-          id TEXT PRIMARY KEY,
-          latitude REAL,
-          longitude REAL,
-          radius REAL,
-          name TEXT
-          alarmEnabled INTEGER DEFAULT 1
-        )
-      ''');
-        // 초기 위치들 삽입 - 앱 최초 실행 시에만
+      CREATE TABLE locations (
+        id TEXT PRIMARY KEY,
+        latitude REAL,
+        longitude REAL,
+        radius REAL,
+        name TEXT,
+        alarmEnabled INTEGER DEFAULT 1
+      )
+    ''');
         await _insertInitialLocations(db);
+      },
+      onUpgrade: (db, oldVersion, newVersion) async {
+        if (oldVersion < 2) {
+          await db.execute(
+            'ALTER TABLE locations ADD COLUMN alarmEnabled INTEGER DEFAULT 1',
+          );
+        }
       },
     );
     return _database!;
