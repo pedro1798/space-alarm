@@ -6,6 +6,7 @@ class StoredLocation {
   final double longitude;
   final double radius;
   final String name;
+  final bool alarmEnabled; // ← 추가
 
   StoredLocation({
     required this.id,
@@ -13,6 +14,7 @@ class StoredLocation {
     required this.longitude,
     required this.radius,
     this.name = '이름없음',
+    this.alarmEnabled = true, // ← 추가
   });
 
   geo.Geofence toGeofence() {
@@ -38,6 +40,7 @@ class StoredLocation {
       'longitude': longitude,
       'radius': radius,
       'name': name,
+      'alarmEnabled': alarmEnabled ? 1 : 0, // 저장용
     };
   }
 
@@ -48,6 +51,18 @@ class StoredLocation {
       longitude: map['longitude'],
       radius: map['radius'],
       name: map['name'] ?? '이름없음',
+      alarmEnabled: map['alarmEnabled'] == 1, // SQLite의 INTEGER(1/0)
+    );
+  }
+
+  StoredLocation copyWith({bool? alarmEnabled}) {
+    return StoredLocation(
+      id: id,
+      latitude: latitude,
+      longitude: longitude,
+      radius: radius,
+      name: name,
+      alarmEnabled: alarmEnabled ?? this.alarmEnabled,
     );
   }
 }
