@@ -21,6 +21,7 @@ class LocationDatabase {
           longitude REAL,
           radius REAL,
           name TEXT
+          alarmEnabled INTEGER DEFAULT 1
         )
       ''');
         // 초기 위치들 삽입 - 앱 최초 실행 시에만
