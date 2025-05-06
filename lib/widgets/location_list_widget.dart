@@ -9,10 +9,10 @@ class LocationListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final LocationController controller = Get.find<LocationController>();
+    final LocationController locCtrl = Get.find<LocationController>();
 
     return Obx(() {
-      final storedLocations = controller.locations;
+      final storedLocations = locCtrl.locations;
 
       if (storedLocations.isEmpty) {
         return const Center(
@@ -34,21 +34,33 @@ class LocationListWidget extends StatelessWidget {
             onTap: () {
               onLocationTap?.call(loc); // 콜백 호출
             },
-            trailing: IconButton(
-              icon: const Icon(Icons.delete, color: Colors.red),
-              onPressed: () {
-                Get.defaultDialog(
-                  title: "Delete Location",
-                  middleText: "Are you sure you want to delete this location?",
-                  textCancel: "Cancel",
-                  textConfirm: "Delete",
-                  confirmTextColor: Colors.white,
-                  onConfirm: () async {
-                    await controller.deleteLocation(loc.toGeofence());
-                    Get.close(1); // 다이얼로그를 닫고 1개 스택을 제거
+            trailing: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Switch(
+                  value: loc.alarmEnabled,
+                  onChanged: (value) async {
+                    await locCtrl.toggleAlarm(loc.id, value);
                   },
-                );
-              },
+                ),
+                IconButton(
+                  icon: const Icon(Icons.delete, color: Colors.red),
+                  onPressed: () {
+                    Get.defaultDialog(
+                      title: "Delete Location",
+                      middleText:
+                          "Are you sure you want to delete this location?",
+                      textCancel: "Cancel",
+                      textConfirm: "Delete",
+                      confirmTextColor: Colors.white,
+                      onConfirm: () async {
+                        await locCtrl.deleteLocation(loc.toGeofence());
+                        Get.close(1);
+                      },
+                    );
+                  },
+                ),
+              ],
             ),
           );
         },

@@ -18,7 +18,7 @@ class FlutterMapWidget extends StatefulWidget {
 }
 
 class _FlutterMapWidgetState extends State<FlutterMapWidget> {
-  final MapController mapController = MapController();
+  final MapController mapController = Get.find<MapController>();
   final LocationController locationController = Get.find<LocationController>();
 
   late final Worker? locationWorker;
