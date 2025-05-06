@@ -3,21 +3,26 @@ import 'package:get/get.dart';
 import 'package:plata/controllers/theme_controller.dart';
 import 'pages/home/home_page.dart';
 import 'themes/app_theme.dart';
-import 'package:native_geofence/native_geofence.dart';
+import 'package:flutter_map/flutter_map.dart';
 import 'handlers/location_permission_hander.dart';
 import 'package:plata/controllers/location_controller.dart';
 import 'handlers/geofence_register.dart';
 
+class InitialBinding extends Bindings {
+  @override
+  void dependencies() {
+    Get.put(ThemeController()); // ThemeController 의존성 주입
+    Get.put(LocationController()); // LocationController 의존성 주입
+    Get.put(MapController());
+  }
+}
+
 void main() async {
   // Before accesing any methods ensure you initialize the plugin:
   WidgetsFlutterBinding.ensureInitialized();
-
-  Get.put(ThemeController()); // ThemeController 의존성 주입
-  Get.put(LocationController()); // LocationController 의존성 주입
-
   await requestLocationPermissions(); // 먼저 위치 권한 요청
   await initGeofenceSystem();
-  runApp(const MyApp());
+  runApp(GetMaterialApp(initialBinding: InitialBinding(), home: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
