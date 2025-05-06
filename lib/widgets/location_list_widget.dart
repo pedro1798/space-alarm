@@ -12,17 +12,19 @@ class LocationListWidget extends StatelessWidget {
     final LocationController controller = Get.find<LocationController>();
 
     return Obx(() {
-      final locations = controller.locations;
+      final storedLocations = controller.locations;
 
-      if (locations.isEmpty) {
-        return const Center(child: Text('There are no locations registered.'));
+      if (storedLocations.isEmpty) {
+        return const Center(
+          child: Text('There are no storedLocations registered.'),
+        );
       }
 
       return ListView.builder(
         // 부모 스크롤 위젯에 위임
-        itemCount: locations.length,
+        itemCount: storedLocations.length,
         itemBuilder: (context, index) {
-          final loc = locations[index];
+          final loc = storedLocations[index];
           return ListTile(
             leading: const Icon(Icons.location_on),
             title: Text('Name: ${loc.name}'),
@@ -42,7 +44,7 @@ class LocationListWidget extends StatelessWidget {
                   textConfirm: "Delete",
                   confirmTextColor: Colors.white,
                   onConfirm: () async {
-                    await controller.deleteLocation(loc.id);
+                    await controller.deleteLocation(loc.toGeofence());
                     Get.close(1); // 다이얼로그를 닫고 1개 스택을 제거
                   },
                 );
