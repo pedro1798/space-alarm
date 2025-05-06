@@ -42,7 +42,7 @@ class _FlutterMapWidgetState extends State<FlutterMapWidget> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (locationController.locations.isNotEmpty) {
         final firstLoc = locationController.locations.first;
-        mapController.move(LatLng(firstLoc.latitude, firstLoc.longitude), 16.5);
+        mapController.move(LatLng(firstLoc.latitude, firstLoc.longitude), 17);
       }
     });
   }
@@ -110,7 +110,7 @@ class _FlutterMapWidgetState extends State<FlutterMapWidget> {
             mapController: mapController,
             options: MapOptions(
               initialCenter: LatLng(35.889230, 128.610263),
-              initialZoom: 16.2,
+              initialZoom: 17,
             ),
             children: [
               TileLayer(

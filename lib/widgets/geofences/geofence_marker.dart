@@ -27,7 +27,9 @@ Marker buildGeofenceMarker(StoredLocation location) {
               textConfirm: '삭제',
               textCancel: '취소',
               onConfirm: () {
-                locationController.deleteLocation(location.id); // 지오펜스 삭제
+                locationController.deleteLocation(
+                  location.toGeofence(),
+                ); // 지오펜스 삭제
                 Get.back(); // 다이얼로그 닫기
               },
               onCancel: () {
