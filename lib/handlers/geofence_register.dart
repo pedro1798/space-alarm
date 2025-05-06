@@ -2,6 +2,9 @@ import 'package:native_geofence/native_geofence.dart' as geo;
 import 'package:plata/models/stored_location.dart';
 import 'package:get/get.dart';
 import 'package:plata/controllers/location_controller.dart';
+import 'package:plata/handlers/notification_hander.dart';
+
+// location_controller.dart에서 가져온 LocationController 사용해 geofence와 location_db 등록
 
 // 앱 실행 시 OS에 등록된 지오펜스를 초기화하는 함수
 Future<void> initGeofenceSystem() async {
@@ -12,7 +15,12 @@ Future<void> initGeofenceSystem() async {
   try {
     await geo.NativeGeofenceManager.instance.removeAllGeofences();
   } catch (e) {
-    print("지오펜스 초기화 실패: $e");
+    Get.snackbar(
+      '초기화 실패',
+      '"지오펜스 초기화 실패: $e"',
+      snackPosition: SnackPosition.BOTTOM,
+      duration: const Duration(seconds: 2),
+    );
   }
 
   // 3. DB에서 저장된 지오펜스를 다시 등록
@@ -49,12 +57,25 @@ Future<void> _geofenceCallback(geo.GeofenceCallbackParams params) async {
 
   if (location == null) return;
 
+  // 저장된 정보 가져오기
+  final locCtrl = Get.find<LocationController>();
+  final allLocations = await locCtrl.getLocations();
+  // 현재 위치와 일치하는 지오펜스 찾기
+  final matched = allLocations.firstWhereOrNull(
+    (l) => l.latitude == location.latitude && l.longitude == location.longitude,
+  );
+
+  // 알람 꺼져 있으면 종료
+  if (matched == null || !matched.alarmEnabled) return;
+
   Get.snackbar(
     '지오펜스 이벤트 발생',
     '$event @ ${location.latitude}, ${location.longitude}',
     snackPosition: SnackPosition.BOTTOM,
     duration: const Duration(seconds: 2),
   );
+  // 실제 알람 울림
+  await showNotification('지오펜스 이벤트 발생', '${matched.name} 지역에서 $event 이벤트 발생');
 }
 
 Future<void> registerGeofence({
