@@ -50,5 +50,3 @@ Enable the app to **trigger a system alarm** when the user enters a geofenced ar
 - 🧪 **Performance testing**: Required for store deployment and user experience assurance.
 
 ---
-
-## 📁 Folder Structure (example)
