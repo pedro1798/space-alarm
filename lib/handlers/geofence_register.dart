@@ -76,7 +76,7 @@ Future<void> _geofenceCallback(geo.GeofenceCallbackParams params) async {
     duration: const Duration(seconds: 5),
   );
   // 실제 알람 울림
-  await showNotification('지오펜스 이벤트 발생', '${matched.name} 지역에서 $event 이벤트 발생');
+  await showNotification('지오펜스 이벤트 발생', '${matched.name} 지역에서 $event 이벤트 발생', id: matched.id.hashCode);
 }
 
 Future<void> registerGeofence({
