@@ -7,6 +7,7 @@ import 'package:flutter_map/flutter_map.dart';
 import 'handlers/location_permission_hander.dart';
 import 'package:plata/controllers/location_controller.dart';
 import 'handlers/geofence_register.dart';
+import 'package:plata/controllers/location_tracker_controller.dart';
 import 'handlers/notification_hander.dart';
 
 void main() async {
@@ -16,6 +17,7 @@ void main() async {
   Get.put(ThemeController()); // ThemeController 의존성 주입
   Get.put(LocationController()); // LocationController 의존성 주입
   Get.put(MapController());
+  Get.put(LocationTrackerController());
 
   await requestLocationPermissions(); // 먼저 위치 권한 요청
   await initGeofenceSystem();

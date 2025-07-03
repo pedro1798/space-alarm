@@ -52,6 +52,7 @@ Future<void> initializeGeofence() async {
 
 /// 콜백 정의
 Future<void> _geofenceCallback(geo.GeofenceCallbackParams params) async {
+  Get.snackbar('지오펜스 이벤트 발생', 'Geofemce Callback triggered');
   final event = params.event;
   final geo.Location? location = params.location;
 
@@ -72,7 +73,7 @@ Future<void> _geofenceCallback(geo.GeofenceCallbackParams params) async {
     '지오펜스 이벤트 발생',
     '$event @ ${location.latitude}, ${location.longitude}',
     snackPosition: SnackPosition.BOTTOM,
-    duration: const Duration(seconds: 2),
+    duration: const Duration(seconds: 5),
   );
   // 실제 알람 울림
   await showNotification('지오펜스 이벤트 발생', '${matched.name} 지역에서 $event 이벤트 발생');

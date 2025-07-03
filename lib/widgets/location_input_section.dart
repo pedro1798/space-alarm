@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:plata/widgets/location_register_widget.dart';
-import 'package:plata/utils/focus_hepler.dart';
+import 'package:plata/utils/focus_helper.dart';
 
 // TextEditingController와 FocusNode 객체들 선언해서 location_register_widget.dart에 전달
 

@@ -3,6 +3,9 @@
 *.log
 *.pyc
 *.swp
+*.swo
+*~
+*.un~
 .DS_Store
 .atom/
 .build/
@@ -12,65 +15,60 @@
 .swiftpm/
 migrate_working_dir/
 
-# IntelliJ related
+# IDE & Editor specific
+# IntelliJ
 *.iml
 *.ipr
 *.iws
 .idea/
+# VSCode
+# The .vscode folder can contain shared launch configurations.
+# Uncomment if you want to ignore it completely.
+# .vscode/
+# Other editors
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
 
-# The .vscode folder contains launch configuration and tasks you configure in
-# VS Code which you may wish to be included in version control, so this line
-# is commented out by default.
-#.vscode/
+# OS specific logs
+logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+dev-debug.log
 
-# Flutter/Dart/Pub related
-**/doc/api/
-**/ios/Flutter/.last_build_id
-.dart_tool/
-.flutter-plugins
-.flutter-plugins-dependencies
+# Dependency directories
+node_modules/
 .pub-cache/
 .pub/
-/build/
 
-# Symbolication related
-app.*.symbols
+# Environment variables
+.env
 
-# Obfuscation related
-app.*.map.json
-
-# Android Studio will place build artifacts here
-/android/app/debug
-/android/app/profile
-/android/app/release
-
-*.swp
-*.swo
-*~
-*.un~
-
-# Created by https://www.toptal.com/developers/gitignore/api/flutter
-# Edit at https://www.toptal.com/developers/gitignore?templates=flutter
-
-### Flutter ###
-# Flutter/Dart/Pub related
-**/doc/api/
+# Flutter/Dart specific
 .dart_tool/
 .flutter-plugins
 .flutter-plugins-dependencies
 .fvm/flutter_sdk
 .packages
-.pub-cache/
-.pub/
+.metadata
 build/
 coverage/
 lib/generated_plugin_registrant.dart
+# It's recommended to commit pubspec.lock for applications.
 # For library packages, don’t commit the pubspec.lock file.
-# Regenerating the pubspec.lock file lets you test your package against the latest compatible versions of its dependencies.
-# See https://dart.dev/guides/libraries/private-files#pubspeclock
-#pubspec.lock
+# pubspec.lock
 
-# Android related
+# Symbolication and Obfuscation
+app.*.symbols
+app.*.map.json
+
+# Android specific
+/android/app/debug
+/android/app/profile
+/android/app/release
 **/android/**/gradle-wrapper.jar
 **/android/.gradle
 **/android/captures/
@@ -80,7 +78,7 @@ lib/generated_plugin_registrant.dart
 **/android/local.properties
 **/android/**/GeneratedPluginRegistrant.java
 
-# iOS/XCode related
+# iOS/XCode specific
 **/ios/**/*.mode1v3
 **/ios/**/*.mode2v3
 **/ios/**/*.moved-aside
@@ -109,13 +107,19 @@ lib/generated_plugin_registrant.dart
 **/ios/ServiceDefinitions.json
 **/ios/Runner/GeneratedPluginRegistrant.*
 
-# Exceptions to above rules.
+# Exceptions to iOS/XCode rules.
 !**/ios/**/default.mode1v3
 !**/ios/**/default.mode2v3
 !**/ios/**/default.pbxuser
 !**/ios/**/default.perspectivev3
 !/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
 
-# End of https://www.toptal.com/developers/gitignore/api/flutter
-
-.metadata
+# Gemini CLI specific folders
+.clinerules/
+.cursor/
+.gemini/
+.roo/
+.roomodes
+.taskmaster/
+.trae/
+.windsurf/

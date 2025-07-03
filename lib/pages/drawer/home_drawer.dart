@@ -3,7 +3,7 @@ import 'package:plata/controllers/theme_controller.dart';
 import 'package:plata/pages/settings_page.dart';
 import 'package:plata/pages/map_page.dart';
 import 'package:get/get.dart';
-import 'package:plata/utils/nevigation_helper.dart' as nh;
+import 'package:plata/utils/navigation_helper.dart' as nh;
 
 class HomeDrawer extends StatelessWidget {
   const HomeDrawer({super.key});

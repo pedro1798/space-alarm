@@ -4,7 +4,7 @@ import 'package:plata/widgets/home/quick_alarm_dialog.dart';
 import 'package:plata/widgets/location_list_widget.dart';
 import 'package:plata/widgets/location_input_section.dart';
 import 'package:plata/handlers/geofence_register.dart' as geofenceRegister;
-import 'package:plata/utils/focus_hepler.dart';
+import 'package:plata/utils/focus_helper.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});

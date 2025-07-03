@@ -18,7 +18,7 @@ class MapPage extends StatelessWidget {
           children: [
             Expanded(
               flex: 3,
-              child: FlutterMapWidget(selectedLocation: selectedLocation),
+              child: FlutterMapWidget(storedLocation: selectedLocation),
             ),
             const Divider(),
             const SizedBox(height: 8),

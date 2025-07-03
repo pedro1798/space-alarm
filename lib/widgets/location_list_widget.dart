@@ -52,7 +52,8 @@ class LocationListWidget extends StatelessWidget {
                           "Are you sure you want to delete this location?",
                       textCancel: "Cancel",
                       textConfirm: "Delete",
-                      confirmTextColor: Colors.white,
+                      confirmTextColor:
+                          Theme.of(context).colorScheme.onSecondary,
                       onConfirm: () async {
                         await locCtrl.deleteLocation(loc.toGeofence());
                         Get.close(1);
