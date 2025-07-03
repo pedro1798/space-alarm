@@ -123,3 +123,13 @@ app.*.map.json
 .taskmaster/
 .trae/
 .windsurf/
+
+# Logs
+# Editor directories and files
+.idea
+.vscode
+# OS specific
+
+# Task files
+# tasks.json
+# tasks/ 
